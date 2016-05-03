@@ -74,13 +74,16 @@ delete(request, reply) {
 list(request, reply) {
   const self = this;
   const args = request.query;
-
-  self.model.list(args).then((result) => {
-    reply(result);
-  }).catch((err) => {
-    log('Controller::list', err);
-    reply(err).statusCode(500);
-  });
+  request.beforeFunc.list(request, reply, () => {
+    self.model.list(args).then((result) => {
+      request.afterFunc.list(request, reply, result, () => {
+        reply(result);
+      })
+    }).catch((err) => {
+      log('Controller::list', err);
+      reply(err).statusCode(500);
+    });
+  })
 }
 
 

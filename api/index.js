@@ -64,6 +64,48 @@ install(options) {
     options.authentications = {};
   }
 
+  // # beforeFunc
+  if (!options.beforeFunc) {
+    options.beforeFunc = {};
+  }
+  console.log(options);
+  if (!options.beforeFunc.create) {
+    options.beforeFunc.create = function(request, reply, next) { return next() };
+  }
+  if (!options.beforeFunc.read) {
+    options.beforeFunc.read = function(request, reply, next) { return next() };
+  }
+  if (!options.beforeFunc.update) {
+    options.beforeFunc.update = function(request, reply, next) { return next() };
+  }
+  if (!options.beforeFunc.delete) {
+    options.beforeFunc.delete = function(request, reply, next) { return next() };
+  }
+  if (!options.beforeFunc.list) {
+    options.beforeFunc.list = function(request, reply, next) { return next() };
+  }
+  
+  // # afterFunc
+  if (!options.afterFunc) {
+    options.afterFunc = {};
+  }
+  console.log(options);
+  if (!options.afterFunc.create) {
+    options.afterFunc.create = function(request, reply, result, next) { return next() };
+  }
+  if (!options.afterFunc.read) {
+    options.afterFunc.read = function(request, reply, result, next) { return next() };
+  }
+  if (!options.afterFunc.update) {
+    options.afterFunc.update = function(request, reply, result, next) { return next() };
+  }
+  if (!options.afterFunc.delete) {
+    options.afterFunc.delete = function(request, reply, result, next) { return next() };
+  }
+  if (!options.afterFunc.list) {
+    options.afterFunc.list = function(request, reply, result, next) { return next() };
+  }
+  
   self.installCreate(options);
   self.installRead(options);
   self.installUpdate(options);
@@ -158,6 +200,8 @@ installList(options) {
     method: 'GET',
     path: `${options.path}/${options.word[1]}`,
     handler: function handleList(request, reply) {
+      request.beforeFunc = options.beforeFunc;
+      request.afterFunc = options.afterFunc;
       return self.controller.list(request, reply);
     },
     config: {

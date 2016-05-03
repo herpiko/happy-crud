@@ -36,6 +36,18 @@ constructor(server) {
     word: 'user',
     path: '/api',
     mount: '/',
+    beforeFunc : {
+      list : function(request, reply, next) {
+        console.log('---------------------------- before function');
+        next();
+      }
+    },
+    afterFunc : {
+      list : function(result, request, reply, next) {
+        console.log('---------------------------- after function');
+        next();
+      }
+    }
   }
 
   const db = this.setupDb();
