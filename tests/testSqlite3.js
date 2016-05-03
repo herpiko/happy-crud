@@ -43,7 +43,7 @@ constructor(server) {
       }
     },
     afterFunc : {
-      list : function(result, request, reply, next) {
+      list : function(request, reply, result, next) {
         console.log('---------------------------- after function');
         next();
       }
