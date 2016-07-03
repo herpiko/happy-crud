@@ -77,6 +77,23 @@ const api = new HappyCrud(server, ctrl, options);
 
 ```
 
+You could do a simple database query directly from URL address, like :
+
+- `?name=Omama&age=19`
+
+Happy CRUD has some reserved words that used as helper in query :
+
+- `search` - search
+- `gt` - greater than
+- `gte` - greather than or equal
+- `lt` - less than
+- `lte` - less than or equal
+
+Example usage :
+
+- `?name=search(omama)` - match the record(s) that has value `hello` in `name` field.
+- `?birthDate=gt(2016-07-03T05:24:02.346Z)` - fetch the record(s) that has newer date than `2016-07-03T05:24:02.346Z`
+
 By using the code, you will have a complete CRUD endpoints at `/v1/api/user` and `/v1/api/users` (depending on the request)
 
 ## Database support
