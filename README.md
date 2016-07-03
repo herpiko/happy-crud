@@ -77,9 +77,11 @@ const api = new HappyCrud(server, ctrl, options);
 
 ```
 
-You could do a simple database query directly from URL address, like :
+By using the code, you will have a complete CRUD endpoints at `/v1/api/user` and `/v1/api/users` (depending on the request)
 
-- `?name=Omama&age=19`
+On `list` method, you could do a simple database query directly from URL address, like :
+
+- `/v1/api/users?name=Omama&age=19`
 
 Happy CRUD has some reserved words that used as helper in query :
 
@@ -91,10 +93,11 @@ Happy CRUD has some reserved words that used as helper in query :
 
 Example usage :
 
-- `?name=search(omama)` - match the record(s) that has value `hello` in `name` field.
-- `?birthDate=gt(2016-07-03T05:24:02.346Z)` - fetch the record(s) that has newer date than `2016-07-03T05:24:02.346Z`
+- `/v1/api/users?name=search(omama)` - match the record(s) that has value `hello` in `name` field.
+- `/v1/api/users?birthDate=gt(2016-07-03T05:24:02.346Z)` - fetch the record(s) that has newer date than `2016-07-03T05:24:02.346Z`
 
-By using the code, you will have a complete CRUD endpoints at `/v1/api/user` and `/v1/api/users` (depending on the request)
+`gt`, `gte`, `lt` and `lte` also works for date value if only the provided value is a valid Date ISO string.
+
 
 ## Database support
 
